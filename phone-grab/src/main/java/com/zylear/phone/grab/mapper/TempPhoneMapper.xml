@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zylear.phone.grab.mapper.TempPhoneMapper" >
+
+  <insert id="copy" parameterType="java.lang.String" >
+    INSERT INTO temp_phone
+    (
+      SELECT link,source,price,0 FROM phone_info WHERE phone_info.source=#{source}
+    )
+  </insert>
+
+  <delete id="deleteBySource" parameterType="java.lang.String">
+    DELETE FROM temp_phone WHERE source=#{source}
+  </delete>
+
+
+
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zylear.phone.grab.mapper.OdsPhoneProfilesMapper" >
+  <resultMap id="BaseResultMap" type="com.zylear.phone.grab.domain.OdsPhoneProfiles" >
+    <id column="link" property="link" jdbcType="VARCHAR" />
+    <result column="brand_apple" property="brandApple" jdbcType="TINYINT" />
+    <result column="brand_mi" property="brandMi" jdbcType="TINYINT" />
+    <result column="brand_honor" property="brandHonor" jdbcType="TINYINT" />
+    <result column="brand_samsung" property="brandSamsung" jdbcType="TINYINT" />
+    <result column="brand_meizu" property="brandMeizu" jdbcType="TINYINT" />
+    <result column="brand_huawei" property="brandHuawei" jdbcType="TINYINT" />
+    <result column="brand_oppo" property="brandOppo" jdbcType="TINYINT" />
+    <result column="brand_vivo" property="brandVivo" jdbcType="TINYINT" />
+    <result column="brand_nokia" property="brandNokia" jdbcType="TINYINT" />
+    <result column="brand_letv" property="brandLetv" jdbcType="TINYINT" />
+    <result column="brand_other" property="brandOther" jdbcType="TINYINT" />
+    <result column="size_other" property="sizeOther" jdbcType="TINYINT" />
+    <result column="pixel_other" property="pixelOther" jdbcType="TINYINT" />
+    <result column="rom_other" property="romOther" jdbcType="TINYINT" />
+    <result column="ram_2" property="ram2" jdbcType="TINYINT" />
+    <result column="ram_3" property="ram3" jdbcType="TINYINT" />
+    <result column="ram_4" property="ram4" jdbcType="TINYINT" />
+    <result column="ram_6" property="ram6" jdbcType="TINYINT" />
+    <result column="ram_other" property="ramOther" jdbcType="TINYINT" />
+    <result column="rom_8" property="rom8" jdbcType="TINYINT" />
+    <result column="rom_16" property="rom16" jdbcType="TINYINT" />
+    <result column="rom_32" property="rom32" jdbcType="TINYINT" />
+    <result column="rom_64" property="rom64" jdbcType="TINYINT" />
+    <result column="rom_128" property="rom128" jdbcType="TINYINT" />
+    <result column="cpu_1" property="cpu1" jdbcType="TINYINT" />
+    <result column="cpu_2" property="cpu2" jdbcType="TINYINT" />
+    <result column="cpu_4" property="cpu4" jdbcType="TINYINT" />
+    <result column="cpu_6" property="cpu6" jdbcType="TINYINT" />
+    <result column="cpu_8" property="cpu8" jdbcType="TINYINT" />
+    <result column="cpu_other" property="cpuOther" jdbcType="TINYINT" />
+    <result column="price_less400" property="priceLess400" jdbcType="TINYINT" />
+    <result column="price_400to1000" property="price400to1000" jdbcType="TINYINT" />
+    <result column="price_1001to1700" property="price1001to1700" jdbcType="TINYINT" />
+    <result column="price_1701to2800" property="price1701to2800" jdbcType="TINYINT" />
+    <result column="price_2801to4500" property="price2801to4500" jdbcType="TINYINT" />
+    <result column="price_greater4500" property="priceGreater4500" jdbcType="TINYINT" />
+    <result column="size_less3p0" property="sizeLess3p0" jdbcType="TINYINT" />
+    <result column="size_3p0to4p5" property="size3p0to4p5" jdbcType="TINYINT" />
+    <result column="size_4p6to5p0" property="size4p6to5p0" jdbcType="TINYINT" />
+    <result column="size_5p1to5p5" property="size5p1to5p5" jdbcType="TINYINT" />
+    <result column="size_greater5p5" property="sizeGreater5p5" jdbcType="TINYINT" />
+    <result column="pixel_less500" property="pixelLess500" jdbcType="TINYINT" />
+    <result column="pixel_500to1000" property="pixel500to1000" jdbcType="TINYINT" />
+    <result column="pixel_1001to1600" property="pixel1001to1600" jdbcType="TINYINT" />
+    <result column="pixel_greater1600" property="pixelGreater1600" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    link, brand_apple, brand_mi, brand_honor, brand_samsung, brand_meizu, brand_huawei, 
+    brand_oppo, brand_vivo, brand_nokia, brand_letv, brand_other, size_other, pixel_other, 
+    rom_other, ram_2, ram_3, ram_4, ram_6, ram_other, rom_8, rom_16, rom_32, rom_64, 
+    rom_128, cpu_1, cpu_2, cpu_4, cpu_6, cpu_8, cpu_other, price_less400, price_400to1000, 
+    price_1001to1700, price_1701to2800, price_2801to4500, price_greater4500, size_less3p0, 
+    size_3p0to4p5, size_4p6to5p0, size_5p1to5p5, size_greater5p5, pixel_less500, pixel_500to1000, 
+    pixel_1001to1600, pixel_greater1600
+  </sql>
+
+  <insert id="insert" parameterType="com.zylear.phone.grab.domain.OdsPhoneProfiles" >
+    insert into ods_phone_profiles (link, brand_apple, brand_mi, 
+      brand_honor, brand_samsung, brand_meizu, 
+      brand_huawei, brand_oppo, brand_vivo, 
+      brand_nokia, brand_letv, brand_other, 
+      size_other, pixel_other, rom_other, 
+      ram_2, ram_3, ram_4, ram_6, 
+      ram_other, rom_8, rom_16, 
+      rom_32, rom_64, rom_128, 
+      cpu_1, cpu_2, cpu_4, cpu_6, 
+      cpu_8, cpu_other, price_less400, 
+      price_400to1000, price_1001to1700, price_1701to2800, 
+      price_2801to4500, price_greater4500, size_less3p0, 
+      size_3p0to4p5, size_4p6to5p0, size_5p1to5p5, 
+      size_greater5p5, pixel_less500, pixel_500to1000, 
+      pixel_1001to1600, pixel_greater1600)
+    values (#{link,jdbcType=VARCHAR}, #{brandApple,jdbcType=TINYINT}, #{brandMi,jdbcType=TINYINT}, 
+      #{brandHonor,jdbcType=TINYINT}, #{brandSamsung,jdbcType=TINYINT}, #{brandMeizu,jdbcType=TINYINT}, 
+      #{brandHuawei,jdbcType=TINYINT}, #{brandOppo,jdbcType=TINYINT}, #{brandVivo,jdbcType=TINYINT}, 
+      #{brandNokia,jdbcType=TINYINT}, #{brandLetv,jdbcType=TINYINT}, #{brandOther,jdbcType=TINYINT}, 
+      #{sizeOther,jdbcType=TINYINT}, #{pixelOther,jdbcType=TINYINT}, #{romOther,jdbcType=TINYINT}, 
+      #{ram2,jdbcType=TINYINT}, #{ram3,jdbcType=TINYINT}, #{ram4,jdbcType=TINYINT}, #{ram6,jdbcType=TINYINT}, 
+      #{ramOther,jdbcType=TINYINT}, #{rom8,jdbcType=TINYINT}, #{rom16,jdbcType=TINYINT}, 
+      #{rom32,jdbcType=TINYINT}, #{rom64,jdbcType=TINYINT}, #{rom128,jdbcType=TINYINT}, 
+      #{cpu1,jdbcType=TINYINT}, #{cpu2,jdbcType=TINYINT}, #{cpu4,jdbcType=TINYINT}, #{cpu6,jdbcType=TINYINT}, 
+      #{cpu8,jdbcType=TINYINT}, #{cpuOther,jdbcType=TINYINT}, #{priceLess400,jdbcType=TINYINT}, 
+      #{price400to1000,jdbcType=TINYINT}, #{price1001to1700,jdbcType=TINYINT}, #{price1701to2800,jdbcType=TINYINT}, 
+      #{price2801to4500,jdbcType=TINYINT}, #{priceGreater4500,jdbcType=TINYINT}, #{sizeLess3p0,jdbcType=TINYINT}, 
+      #{size3p0to4p5,jdbcType=TINYINT}, #{size4p6to5p0,jdbcType=TINYINT}, #{size5p1to5p5,jdbcType=TINYINT}, 
+      #{sizeGreater5p5,jdbcType=TINYINT}, #{pixelLess500,jdbcType=TINYINT}, #{pixel500to1000,jdbcType=TINYINT}, 
+      #{pixel1001to1600,jdbcType=TINYINT}, #{pixelGreater1600,jdbcType=TINYINT})
+  </insert>
+
+  <delete id="deleteBySource" parameterType="java.lang.String">
+    DELETE a FROM ods_phone_profiles a INNER JOIN ods_phone_info b ON a.link=b.link WHERE b.source=#{source}
+  </delete>
+
+  <select id="selectByLink" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT * FROM ods_phone_profiles WHERE link=#{link}
+  </select>
+
+</mapper>

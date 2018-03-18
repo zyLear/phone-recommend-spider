@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zylear.phone.grab.mapper.OdsPhoneInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zylear.phone.grab.domain.OdsPhoneInfo" >
+    <id column="link" property="link" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="ram" property="ram" jdbcType="VARCHAR" />
+    <result column="pixel" property="pixel" jdbcType="VARCHAR" />
+    <result column="rom" property="rom" jdbcType="VARCHAR" />
+    <result column="cpu" property="cpu" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <resultMap id="LinkMap" type="com.zylear.phone.grab.domain.OdsPhoneInfo">
+    <id column="link" property="link"/>
+  </resultMap>
+
+
+  <insert id="insertBased" parameterType="com.zylear.phone.grab.domain.OdsPhoneInfo">
+      INSERT INTO  ods_phone_info(title,link,img,source,price)
+      VALUES (#{title},#{link},#{img},#{source},#{price})
+  </insert>
+
+  <select id="getPhoneInfoBySource" parameterType="java.lang.String" resultMap="BaseResultMap">
+      SELECT * FROM ods_phone_info WHERE source=#{source}
+  </select>
+
+  <update id="insertDetail" parameterType="com.zylear.phone.grab.domain.OdsPhoneInfo">
+    UPDATE ods_phone_info
+    SET brand=#{brand},
+    size=#{size},
+    ram=#{ram},
+    pixel=#{pixel},
+    rom=#{rom},
+    cpu=#{cpu},
+    model=#{model}
+    WHERE link=#{link}
+  </update>
+
+  <select id="getAdd" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT a.* FROM (SELECT * FROM ods_phone_info WHERE source=#{source}) AS a
+      LEFT OUTER JOIN (SELECT link FROM phone_info WHERE source=#{source}) AS b
+      ON a.link=b.link
+    WHERE b.link IS NULL
+  </select>
+
+  <select id="getUpdate" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT a.* FROM (SELECT * FROM ods_phone_info WHERE source=#{source}) AS a
+      INNER JOIN (SELECT link FROM phone_info WHERE source=#{source}) AS b
+        ON a.link=b.link
+  </select>
+
+  <select id="getDelete" parameterType="java.lang.String" resultMap="LinkMap">
+    SELECT b.link FROM (SELECT link FROM ods_phone_info WHERE source=#{source}) AS a
+    RIGHT OUTER JOIN (SELECT link FROM phone_info WHERE source=#{source}) AS b
+    ON a.link=b.link
+    WHERE a.link IS NULL
+  </select>
+
+  <delete id="deleteBySource" parameterType="java.lang.String">
+      DELETE FROM ods_phone_info WHERE source=#{source}
+  </delete>
+
+  <delete id="deleteNoEffect" parameterType="java.lang.String">
+    DELETE ods_phone_info FROM ods_phone_profiles RIGHT JOIN ods_phone_info on ods_phone_profiles.link = ods_phone_info.link WHERE ods_phone_info.source=#{source} AND ods_phone_profiles.link IS NULL
+  </delete>
+
+</mapper>

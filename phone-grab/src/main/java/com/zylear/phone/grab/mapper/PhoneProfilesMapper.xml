@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zylear.phone.grab.mapper.PhoneProfilesMapper">
+
+
+    <insert id="insert" parameterType="java.lang.String">
+        INSERT INTO phone_profiles (id, brand_apple, brand_mi,
+        brand_honor, brand_samsung, brand_meizu,
+        brand_huawei, brand_oppo, brand_vivo,
+        brand_nokia, brand_letv, brand_other,
+        price_less400, price_400to1000, price_1001to1700,
+        price_1701to2800, price_2801to4500, price_greater4500,
+        size_less3p0, size_3p0to4p5, size_4p6to5p0,
+        size_5p1to5p5, size_greater5p5, size_other,
+        ram_2, ram_3, ram_4, ram_6,
+        ram_other, pixel_less500, pixel_500to1000,
+        pixel_1001to1600, pixel_greater1600, pixel_other,
+        rom_8, rom_16, rom_32,
+        rom_64, rom_128, rom_other,
+        cpu_1, cpu_2, cpu_4, cpu_6,
+        cpu_8, cpu_other)
+        (
+         SELECT id , brand_apple, brand_mi,
+                brand_honor, brand_samsung, brand_meizu,
+                brand_huawei, brand_oppo, brand_vivo,
+                brand_nokia, brand_letv, brand_other,
+                price_less400, price_400to1000, price_1001to1700,
+                price_1701to2800, price_2801to4500, price_greater4500,
+                size_less3p0, size_3p0to4p5, size_4p6to5p0,
+                size_5p1to5p5, size_greater5p5, size_other,
+                ram_2, ram_3, ram_4, ram_6,
+                ram_other, pixel_less500, pixel_500to1000,
+                pixel_1001to1600, pixel_greater1600, pixel_other,
+                rom_8, rom_16, rom_32,rom_64, rom_128, rom_other,
+                cpu_1, cpu_2, cpu_4, cpu_6,cpu_8, cpu_other
+          FROM phone_info LEFT JOIN ods_phone_profiles
+          ON phone_info.link=ods_phone_profiles.link
+          WHERE ods_phone_profiles.link=#{link}
+         )
+    </insert>
+
+
+    <update id="update" parameterType="com.zylear.phone.grab.domain.OdsPhoneProfiles">
+        UPDATE phone_profiles
+        SET brand_apple = #{brandApple,jdbcType=TINYINT},
+            brand_mi = #{brandMi,jdbcType=TINYINT},
+            brand_honor = #{brandHonor,jdbcType=TINYINT},
+            brand_samsung = #{brandSamsung,jdbcType=TINYINT},
+            brand_meizu = #{brandMeizu,jdbcType=TINYINT},
+            brand_huawei = #{brandHuawei,jdbcType=TINYINT},
+            brand_oppo = #{brandOppo,jdbcType=TINYINT},
+            brand_vivo = #{brandVivo,jdbcType=TINYINT},
+            brand_nokia = #{brandNokia,jdbcType=TINYINT},
+            brand_letv = #{brandLetv,jdbcType=TINYINT},
+            brand_other = #{brandOther,jdbcType=TINYINT},
+            size_other = #{sizeOther,jdbcType=TINYINT},
+            pixel_other = #{pixelOther,jdbcType=TINYINT},
+            rom_other = #{romOther,jdbcType=TINYINT},
+            ram_2 = #{ram2,jdbcType=TINYINT},
+            ram_3 = #{ram3,jdbcType=TINYINT},
+            ram_4 = #{ram4,jdbcType=TINYINT},
+            ram_6 = #{ram6,jdbcType=TINYINT},
+            ram_other = #{ramOther,jdbcType=TINYINT},
+            rom_8 = #{rom8,jdbcType=TINYINT},
+            rom_16 = #{rom16,jdbcType=TINYINT},
+            rom_32 = #{rom32,jdbcType=TINYINT},
+            rom_64 = #{rom64,jdbcType=TINYINT},
+            rom_128 = #{rom128,jdbcType=TINYINT},
+            cpu_1 = #{cpu1,jdbcType=TINYINT},
+            cpu_2 = #{cpu2,jdbcType=TINYINT},
+            cpu_4 = #{cpu4,jdbcType=TINYINT},
+            cpu_6 = #{cpu6,jdbcType=TINYINT},
+            cpu_8 = #{cpu8,jdbcType=TINYINT},
+            cpu_other = #{cpuOther,jdbcType=TINYINT},
+            price_less400 = #{priceLess400,jdbcType=TINYINT},
+            price_400to1000 = #{price400to1000,jdbcType=TINYINT},
+            price_1001to1700 = #{price1001to1700,jdbcType=TINYINT},
+            price_1701to2800 = #{price1701to2800,jdbcType=TINYINT},
+            price_2801to4500 = #{price2801to4500,jdbcType=TINYINT},
+            price_greater4500 = #{priceGreater4500,jdbcType=TINYINT},
+            size_less3p0 = #{sizeLess3p0,jdbcType=TINYINT},
+            size_3p0to4p5 = #{size3p0to4p5,jdbcType=TINYINT},
+            size_4p6to5p0 = #{size4p6to5p0,jdbcType=TINYINT},
+            size_5p1to5p5 = #{size5p1to5p5,jdbcType=TINYINT},
+            size_greater5p5 = #{sizeGreater5p5,jdbcType=TINYINT},
+            pixel_less500 = #{pixelLess500,jdbcType=TINYINT},
+            pixel_500to1000 = #{pixel500to1000,jdbcType=TINYINT},
+            pixel_1001to1600 = #{pixel1001to1600,jdbcType=TINYINT},
+            pixel_greater1600 = #{pixelGreater1600,jdbcType=TINYINT}
+        WHERE id = (SELECT id FROM phone_info WHERE link=#{link})
+    </update>
+
+</mapper>

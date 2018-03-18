@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zylear.phone.grab.mapper.PhoneInfoMapper">
+
+    <insert id="insert" parameterType="com.zylear.phone.grab.domain.OdsPhoneInfo">
+        INSERT INTO phone_info(link, title, img, source, price, brand, size, ram, pixel, rom, cpu,model,is_delete)
+        VALUES (#{link}, #{title}, #{img}, #{source}, #{price}, #{brand}, #{size}, #{ram}, #{pixel}, #{rom}, #{cpu},#{model},0)
+    </insert>
+
+    <update id="update" parameterType="com.zylear.phone.grab.domain.OdsPhoneInfo">
+        UPDATE phone_info
+        SET
+            defference = price - #{price},
+            title = #{title},
+            img = #{img},
+            source = #{source},
+            price = #{price},
+            brand = #{brand},
+            size = #{size},
+            ram = #{ram},
+            pixel = #{pixel},
+            rom = #{rom},
+            cpu = #{cpu},
+            model=#{model},
+            is_delete=0
+        WHERE link = #{link}
+    </update>
+
+
+    <update id="deleteByLink" parameterType="java.lang.String">
+       UPDATE phone_info SET phone_info.is_delete=1 WHERE link=#{link}
+    </update>
+    <!-- DELETE FROM phone_info WHERE link=#{link}-->
+    <delete id="deleteNoEffect" parameterType="java.lang.String">
+        DELETE phone_info FROM phone_profiles RIGHT JOIN phone_info on phone_profiles.id = phone_info.id WHERE phone_info.source=#{source} AND phone_profiles.id IS NULL
+    </delete>
+
+</mapper>
