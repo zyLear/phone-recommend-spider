@@ -1,26 +1,29 @@
-package com.zylear.phone.grab.grab.impl;
+package com.zylear.phone.grab.spider.manager;
 
 
 import com.zylear.phone.grab.domain.OdsPhoneInfo;
 import com.zylear.phone.grab.domain.OdsPhoneProfiles;
 import com.zylear.phone.grab.mapper.*;
-import org.openqa.selenium.Capabilities;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriver.Options;
-import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.WebDriver.Timeouts;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 /**
  * Created by Administrator on 2017/8/15.
  */
-public abstract class BaseWebGrab {
+public abstract class BaseChromeDriver {
 
     public String thisSource;
 
@@ -36,27 +39,53 @@ public abstract class BaseWebGrab {
     public PhoneProfilesMapper phoneProfilesMapper;
 
 
-//    static {
-//        System.setProperty("webdriver.firefox.marionette", "D://FireFox//驱动//geckodriver.exe");
-//        System.setProperty("webdriver.firefox.bin", "D://FireFox//firefox.exe");
-//    }
+    static {
+        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+        //  System.setProperty("webdriver.firefox.bin", "D://FireFox//firefox.exe");
+    }
 
 
-    protected WebDriver getWebDriver(FirefoxProfile firefoxProfile) {
+    public static synchronized WebDriver getWebDriver() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("test-type"); //ignore certificate errors
 
-        firefoxProfile.setPreference("browser.cache.disk.parent_directory", "D:\\FireFox\\缓存");
-        firefoxProfile.setPreference("browser.cache.offline.parent_directory", "D:\\FireFox\\缓存");
-        firefoxProfile.setPreference("browser.cache.disk.enable", true);
-        firefoxProfile.setPreference("browser.cache.offline.enable", true);
+//        options.addArguments("--headless");// headless mode(chrome)
 
 
-//        FirefoxBinary firefoxBinary = new FirefoxBinary();
-//        firefoxBinary.addCommandLineOptions("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--dns-prefetch-disable");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--verbose");
+        options.addArguments("--lang=" + "zh-CN");
+        //options.addArguments("--user-agent=" + user.getUserAgent());
+        options.addArguments("--window-size=1900,1600");
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
+        desiredCapabilities.setJavascriptEnabled(true);
+        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-        WebDriver ffDriver = new FirefoxDriver(firefoxProfile);
-        ffDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);  //找不到元素就等待 2 秒!!!!!!!!
-        ffDriver.manage().window().maximize();
-        return ffDriver;
+//        if (SimulatorConfig.getInstance().isLogPreferences()) {
+//            LoggingPreferences logPrefs = new LoggingPreferences();
+//            logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+//            desiredCapabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+//        }
+
+      //  fillDesiredProxy(user, desiredCapabilities);
+        // https://www.chromium.org/developers/design-documents/network-settings
+//        if (!CollectionsUtil.isNullOrEmpty(user.getBypassProxyHostPattern())) {
+//            String hosts = CollectionsUtil.join(";", user.getBypassProxyHostPattern());
+//            options.addArguments("--proxy-bypass-list=" + hosts);
+//        }
+
+//        options.addArguments("--proxy-bypass-list=log-data.changingedu.com");
+//        HttpProxy httpProxy = user.getHttpProxy();
+//        options.addArguments("--proxy_server=" + httpProxy.getDomain()+ ":" + httpProxy.getPort());
+
+        ChromeDriver chromeDriver = new ChromeDriver(desiredCapabilities);
+        Timeouts timeouts = chromeDriver.manage().timeouts();
+//        timeouts.implicitlyWait(60, TimeUnit.SECONDS);
+        timeouts.setScriptTimeout(60, TimeUnit.SECONDS);
+        timeouts.pageLoadTimeout(80, TimeUnit.SECONDS);
+        return chromeDriver;
     }
 
     public void copy() {
@@ -114,7 +143,7 @@ public abstract class BaseWebGrab {
             i++;
         }
         System.out.println("add结束");
-        // System.setProperty("webdriver.chrome.driver", "E:\\selenium\\chromedriveer2.32\\chromedriver.exe");
+
     }
 
     private void update() {
@@ -372,5 +401,34 @@ public abstract class BaseWebGrab {
         } else {
             odsPhoneProfiles.setCpuOther(1);
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("rrr");
+        BaseChromeDriver baseChromeDriver = new BaseChromeDriver() {
+            @Override
+            public void getWebInfo() {
+                WebDriver driver = getWebDriver();
+                driver.get("https://www.baidu.com");
+                System.out.println(driver.getPageSource());
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                driver.close();
+            }
+
+            @Override
+            public void getDetailWebInfo() {
+
+            }
+        };
+
+        baseChromeDriver.getWebInfo();
+      //  System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+     //   ChromeDriver driver = new ChromeDriver();
+      //  driver.get("https://www.baidu.com");
+        System.out.println("f");
     }
 }
