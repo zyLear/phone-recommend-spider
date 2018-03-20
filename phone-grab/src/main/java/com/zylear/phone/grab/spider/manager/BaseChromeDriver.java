@@ -404,30 +404,30 @@ public abstract class BaseChromeDriver {
     }
 
     public static void main(String[] args) {
-        System.out.println("rrr");
-        BaseChromeDriver baseChromeDriver = new BaseChromeDriver() {
-            @Override
-            public void getWebInfo() {
-                WebDriver driver = getWebDriver();
-                driver.get("https://www.baidu.com");
-                System.out.println(driver.getPageSource());
-                try {
-                    TimeUnit.SECONDS.sleep(3);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                driver.close();
-            }
-
-            @Override
-            public void getDetailWebInfo() {
-
-            }
-        };
-
-        baseChromeDriver.getWebInfo();
-      //  System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
-     //   ChromeDriver driver = new ChromeDriver();
+//        System.out.println("rrr");
+//        BaseChromeDriver baseChromeDriver = new BaseChromeDriver() {
+//            @Override
+//            public void getWebInfo() {
+//                WebDriver driver = getWebDriver();
+//                driver.get("https://www.baidu.com");
+//                System.out.println(driver.getPageSource());
+//                try {
+//                    TimeUnit.SECONDS.sleep(3);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                driver.close();
+//            }
+//
+//            @Override
+//            public void getDetailWebInfo() {
+//
+//            }
+//        };
+//
+//        baseChromeDriver.getWebInfo();
+        System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+        ChromeDriver driver = new ChromeDriver();
       //  driver.get("https://www.baidu.com");
         System.out.println("f");
     }

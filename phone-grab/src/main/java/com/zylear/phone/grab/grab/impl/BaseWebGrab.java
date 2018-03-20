@@ -4,13 +4,18 @@ package com.zylear.phone.grab.grab.impl;
 import com.zylear.phone.grab.domain.OdsPhoneInfo;
 import com.zylear.phone.grab.domain.OdsPhoneProfiles;
 import com.zylear.phone.grab.mapper.*;
+import com.zylear.phone.grab.util.SiteFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriver.Options;
+import org.openqa.selenium.WebDriver.Timeouts;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,13 +41,14 @@ public abstract class BaseWebGrab {
     public PhoneProfilesMapper phoneProfilesMapper;
 
 
-//    static {
-//        System.setProperty("webdriver.firefox.marionette", "D://FireFox//驱动//geckodriver.exe");
-//        System.setProperty("webdriver.firefox.bin", "D://FireFox//firefox.exe");
-//    }
+    static {
+        System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver.exe");
+        System.setProperty("webdriver.firefox.marionette", "D://FireFox//驱动//geckodriver.exe");
+        System.setProperty("webdriver.firefox.bin", "D://FireFox//firefox.exe");
+    }
 
 
-    protected WebDriver getWebDriver(FirefoxProfile firefoxProfile) {
+    protected WebDriver getFireFoxWebDriver(FirefoxProfile firefoxProfile) {
 
         firefoxProfile.setPreference("browser.cache.disk.parent_directory", "D:\\FireFox\\缓存");
         firefoxProfile.setPreference("browser.cache.offline.parent_directory", "D:\\FireFox\\缓存");
@@ -57,6 +63,33 @@ public abstract class BaseWebGrab {
         ffDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);  //找不到元素就等待 2 秒!!!!!!!!
         ffDriver.manage().window().maximize();
         return ffDriver;
+    }
+
+
+    protected synchronized WebDriver getWebDriver() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("test-type"); //ignore certificate errors
+
+//        options.addArguments("--headless");// headless mode(chrome)
+
+
+        options.addArguments("--disable-gpu");
+        options.addArguments("--dns-prefetch-disable");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--verbose");
+        options.addArguments("--lang=" + "zh-CN");
+        options.addArguments("--user-agent=" + SiteFactory.getUserAgent());
+        options.addArguments("--window-size=1900,1600");
+        DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
+        desiredCapabilities.setJavascriptEnabled(true);
+        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
+        ChromeDriver chromeDriver = new ChromeDriver(desiredCapabilities);
+        Timeouts timeouts = chromeDriver.manage().timeouts();
+//        timeouts.implicitlyWait(60, TimeUnit.SECONDS);
+        timeouts.setScriptTimeout(60, TimeUnit.SECONDS);
+        timeouts.pageLoadTimeout(80, TimeUnit.SECONDS);
+        return chromeDriver;
     }
 
     public void copy() {

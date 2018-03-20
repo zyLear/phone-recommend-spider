@@ -47,9 +47,9 @@ public class WebGrab {
     public void dealFeiNiuWang() {
         feiNiuWang.copy();
         feiNiuWang.getOdsInfo();
-//        feiNiuWang.getOdsProfiles();
-//        feiNiuWang.merge();
-//        feiNiuWang.deleteNoEffect();
+        feiNiuWang.getOdsProfiles();
+        feiNiuWang.merge();
+        feiNiuWang.deleteNoEffect();
     }
 
     public void dealYiHaoDian() {

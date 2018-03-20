@@ -1,6 +1,5 @@
 package com.zylear.phone.grab.grab.impl;
 
-import com.google.gson.internal.LinkedHashTreeMap;
 import com.zylear.phone.grab.domain.OdsPhoneInfo;
 import com.zylear.phone.grab.grab.WebGrabInterface;
 import com.zylear.phone.grab.util.SiteFactory;
@@ -12,9 +11,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ public class YiHaoDianImpl extends BaseWebGrab implements WebGrabInterface {
     public void getWebInfo() {
 
 
-        WebDriver ffDriver = getWebDriver(new FirefoxProfile());
+        WebDriver ffDriver = getWebDriver();
 
         int p = 1;
         int i = 0;
@@ -50,9 +50,9 @@ public class YiHaoDianImpl extends BaseWebGrab implements WebGrabInterface {
 
             if (p == 1) {
                 try {
-                    // WebElement sss = ffDriver.findElement(By.cssSelector(".close_btn"));
+                    WebElement sss = ffDriver.findElement(By.cssSelector(".close_btn"));
                     Thread.sleep(1000);
-                    //  sss.click();
+                    sss.click();
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println("找不到按钮哦");
@@ -182,7 +182,7 @@ public class YiHaoDianImpl extends BaseWebGrab implements WebGrabInterface {
                         .connect(url)
                         .header("User-Agent", SiteFactory.getUserAgent())
                         .ignoreContentType(true)
-                        .headers(getHeaders("http:"+odsPhoneInfo.getLink()))
+                        .headers(getHeaders("http:" + odsPhoneInfo.getLink()))
                         .execute();
             } catch (IOException e) {
                 logger.warn("网页打不开!", e);
@@ -259,7 +259,7 @@ public class YiHaoDianImpl extends BaseWebGrab implements WebGrabInterface {
                 }
 
             } catch (JSONException e) {
-                logger.warn("no arrayJson formatString:{}",string,e);
+                logger.warn("no arrayJson formatString:{}", string, e);
             }
 
 
