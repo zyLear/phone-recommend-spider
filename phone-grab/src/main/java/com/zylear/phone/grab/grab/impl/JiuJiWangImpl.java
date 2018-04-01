@@ -41,7 +41,7 @@ public class JiuJiWangImpl extends BaseWebGrab implements WebGrabInterface {
         int chance = 1;
         int count = 1;
 
-        WebDriver webDriver = getWebDriver(new FirefoxProfile());
+        WebDriver webDriver = getWebDriver();
 
 
 

@@ -3,6 +3,7 @@ package com.zylear.phone.grab.grab.impl;
 
 import com.zylear.phone.grab.domain.OdsPhoneInfo;
 import com.zylear.phone.grab.grab.WebGrabInterface;
+import com.zylear.phone.grab.spider.manager.BaseChromeDriver;
 import com.zylear.phone.grab.util.SiteFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -43,7 +44,7 @@ public class JingDongImpl extends BaseWebGrab implements WebGrabInterface {
 //        firefoxProfile.setPreference("permissions.default.stylesheet", 2);
         //  ffDriver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); //网页加载3秒超时
 
-        WebDriver ffDriver = getWebDriver(new FirefoxProfile());
+        WebDriver ffDriver = BaseChromeDriver.getWebDriver();//getWebDriver(new FirefoxProfile());
 
 
         int page = 1;

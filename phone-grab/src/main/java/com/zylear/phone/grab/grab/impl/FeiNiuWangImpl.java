@@ -2,6 +2,7 @@ package com.zylear.phone.grab.grab.impl;
 
 import com.zylear.phone.grab.domain.OdsPhoneInfo;
 import com.zylear.phone.grab.grab.WebGrabInterface;
+import com.zylear.phone.grab.spider.manager.BaseChromeDriver;
 import com.zylear.phone.grab.util.SiteFactory;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -43,7 +44,7 @@ public class FeiNiuWangImpl extends BaseWebGrab implements WebGrabInterface {
         int i = 0;
         int MAX = 37;
 
-        WebDriver ffDriver = getWebDriver(new FirefoxProfile());
+        WebDriver ffDriver = BaseChromeDriver.getWebDriver();// getWebDriver(new FirefoxProfile());
 
         ffDriver.get("http://search.feiniu.com/?q=%E6%89%8B%E6%9C%BA&tp=search.0.3006.6.1490171856228VP8P&page=" + p);
         try {

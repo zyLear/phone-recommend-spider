@@ -52,7 +52,7 @@ public class SuNingImpl extends BaseWebGrab implements WebGrabInterface {
 
     @Override
     public void getWebInfo() {
-        WebDriver ffDriver = getWebDriver(new FirefoxProfile());
+        WebDriver ffDriver = getWebDriver();
         try {
             ffDriver.get("http://list.suning.com/0-20006-0.html");
         } catch (Exception e) {

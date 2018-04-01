@@ -60,7 +60,7 @@ public class WebGrab {
         yiHaoDian.deleteNoEffect();
     }
 
-    public void dealJiuJiWang(){
+    public void dealJiuJiWang() {
         jiuJiWang.copy();
         jiuJiWang.getOdsInfo();
         jiuJiWang.getOdsProfiles();
