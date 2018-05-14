@@ -44,7 +44,7 @@ public class FeiNiuWangImpl extends BaseWebGrab implements WebGrabInterface {
         int i = 0;
         int MAX = 37;
 
-        WebDriver ffDriver = BaseChromeDriver.getWebDriver();// getWebDriver(new FirefoxProfile());
+        WebDriver ffDriver = getWebDriver();// getWebDriver(new FirefoxProfile());
 
         ffDriver.get("http://search.feiniu.com/?q=%E6%89%8B%E6%9C%BA&tp=search.0.3006.6.1490171856228VP8P&page=" + p);
         try {

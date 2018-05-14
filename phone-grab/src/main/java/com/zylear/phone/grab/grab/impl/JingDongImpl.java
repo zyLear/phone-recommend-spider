@@ -44,7 +44,7 @@ public class JingDongImpl extends BaseWebGrab implements WebGrabInterface {
 //        firefoxProfile.setPreference("permissions.default.stylesheet", 2);
         //  ffDriver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS); //网页加载3秒超时
 
-        WebDriver ffDriver = BaseChromeDriver.getWebDriver();//getWebDriver(new FirefoxProfile());
+        WebDriver ffDriver =getWebDriver();//getWebDriver(new FirefoxProfile());
 
 
         int page = 1;

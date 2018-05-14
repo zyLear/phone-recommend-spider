@@ -40,7 +40,7 @@ public abstract class BaseChromeDriver {
 
 
     static {
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
         //  System.setProperty("webdriver.firefox.bin", "D://FireFox//firefox.exe");
     }
 
